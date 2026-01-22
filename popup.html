@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 350px;
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f1220;
+            color: #eaeaf0;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #6c5ce7, #0984e3);
+            color: #fff;
+            padding: 12px 15px;
+            font-weight: 700;
+            font-size: 14px;
+            border-bottom: 2px solid #1e2235;
+        }
+
+        .container {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Card styles */
+        .card {
+            background: #161a2e;
+            border: 1px solid #23274a;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.35);
+        }
+
+        .card-title {
+            background: #1e223a;
+            padding: 8px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #a29bfe;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            border-bottom: 1px solid #2d325c;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 10px 12px;
+            font-size: 12px;
+        }
+
+        /* Status badge */
+        .badge {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .badge.gray { background: #636e72; }
+        .badge.green { background: #00b894; }
+        .badge.red { background: #d63031; }
+
+        /* List */
+        ul {
+            margin: 0;
+            padding-left: 18px;
+            line-height: 1.6;
+            color: #dfe6e9;
+        }
+
+        li { margin-bottom: 2px; }
+
+        /* Input fields and buttons */
+        .input-group {
+            display: flex;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 7px;
+            border: 1px solid #2d325c;
+            border-radius: 4px 0 0 4px;
+            font-family: monospace;
+            font-size: 11px;
+            outline: none;
+            background: #0f1220;
+            color: #00cec9;
+        }
+
+        input[type="text"]:focus {
+            border-color: #6c5ce7;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            font-weight: 700;
+            transition: 0.2s;
+            padding: 8px;
+            font-size: 11px;
+        }
+
+        .btn-scan {
+            background: linear-gradient(90deg, #0984e3, #6c5ce7);
+            width: 100%;
+            border-radius: 6px;
+        }
+
+        .btn-scan:hover {
+            opacity: 0.85;
+        }
+
+        .btn-exploit {
+            background: linear-gradient(90deg, #d63031, #e17055);
+            border-radius: 0 4px 4px 0;
+            padding: 0 15px;
+        }
+
+        .btn-exploit:hover {
+            opacity: 0.85;
+        }
+
+        .btn-exploit:disabled {
+            background: #636e72;
+            cursor: not-allowed;
+        }
+
+        /* Result area */
+        .result-box {
+            margin-top: 8px;
+            border-top: 1px dashed #2d325c;
+            padding-top: 8px;
+            display: none;
+        }
+
+        .console-out {
+            background: #000;
+            color: #00ffcc;
+            padding: 8px;
+            border-radius: 6px;
+            font-family: 'Consolas', monospace;
+            font-size: 11px;
+            margin-top: 5px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            box-shadow: inset 0 0 8px rgba(0,255,204,0.15);
+        }
+
+        .error-out {
+            color: #ff7675;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<div class="header" style="text-align:center;">
+    <div style="font-size:14px; font-weight:800;">
+        RSC Security Tool
+    </div>
+    <div style="font-size:10px; opacity:.75; margin-top:3px;">
+        Created by <span style="color:#00cec9; font-weight:700;">Xploit_Hunter</span>
+    </div>
+</div>
+
+
+    <div class="container">
+        <div class="card">
+            <div class="card-title">
+                1. Passive Detection
+                <span id="passive-badge" class="badge gray">SCANNING</span>
+            </div>
+            <div class="card-body">
+                <ul id="passive-list"><li>Waiting for page...</li></ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">2. Active Fingerprint (RSC:1)</div>
+            <div class="card-body">
+                <button id="btnFingerprint" class="btn-scan">Start Fingerprint Probe</button>
+                <div id="fingerprint-result" class="result-box">
+                    <ul id="active-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="border-color:#e17055;">
+            <div class="card-title" style="background:#1e223a;color:#ff7675;">
+                3. RCE Exploit (CVE-2025-55182)
+            </div>
+            <div class="card-body">
+                <div class="input-group">
+                    <input type="text" id="cmdInput" placeholder="Command (echo vulnerability_test)" value="echo vulnerability_test">
+                    <button id="btnExploit" class="btn-exploit">EXEC</button>
+                </div>
+                <div id="exploit-status" style="font-size:10px;color:#b2bec3;display:none;">
+                    Sending payload...
+                </div>
+                <div id="exploit-result" class="result-box">
+                    <div id="rce-output" class="console-out"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
