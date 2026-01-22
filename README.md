@@ -109,8 +109,8 @@ This tool is designed for legitimate security research and educational purposes.
 ## Documentation
 
 - **English**: This file (README.md)
-- **中文**: [README_cn.md](README_cn.md) - 中文文档
 
 ---
+
 
 **⚠️ For authorized security testing only**
