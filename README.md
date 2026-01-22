@@ -1,5 +1,4 @@
-# RSC Fingerprint Detector
-
+# RSC-SECURITY-TOOL
 A Chrome extension for detecting React Server Components (RSC) and Next.js App Router fingerprints on web pages.
 
 ## ⚠️ Important Notice
@@ -42,7 +41,7 @@ The extension uses multiple detection techniques:
    - Open Chrome and go to `chrome://extensions/`
    - Enable "Developer mode" (toggle in top right)
    - Click "Load unpacked"
-   - Select the RSC_Detector folder
+   - Select the RSC-SECURITY-TOOL folder
 
 ## Usage
 
@@ -59,7 +58,7 @@ The screenshot above shows the extension running when RSC is detected, including
 ## File Structure
 
 ```
-RSC_Detector/
+RSC-SECURITY-TOOL/
 ├── manifest.json          # Extension configuration
 ├── content.js             # Main detection logic
 ├── popup.html             # Extension popup interface
@@ -114,5 +113,6 @@ This tool is designed for legitimate security research and educational purposes.
 
 
 **⚠️ For authorized security testing only**
+
 
 
